@@ -14,3 +14,4 @@ Run the executable:
 ```
 ./a.out
 ```
+![screenshot](resources/images/screenshot.png)
