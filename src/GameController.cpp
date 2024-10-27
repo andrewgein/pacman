@@ -11,7 +11,7 @@ GameController::GameController(GameData &data, Map &map)
 }
 
 void GameController::update() {
-  //_soundController.update();
+  _soundController.update();
   if (_data.stage == GameData::Readiness) {
     if (!_readinessTimer.isActive()) {
       _readinessTimer.start();
