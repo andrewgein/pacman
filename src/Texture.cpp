@@ -1,8 +1,11 @@
 #include "Texture.hpp"
 
 Texture::Texture() {
+  type = NONE;
   clip = nullptr;
   texture = nullptr;
+  font = nullptr;
+  renderer = nullptr;
   rectangle = new SDL_Rect();
   rectangle->w = -1;
   rectangle->h = -1;
@@ -28,7 +31,7 @@ int Texture::loadFont(const std::string &file, const std::string &_text, int fon
                    FC_MakeColor(color->r, color->g, color->b, color->a),
                    TTF_STYLE_NORMAL)) {
 
-    throw new TextureException();
+    throw TextureException();
     return 1;
   }
   return 0;
@@ -41,7 +44,7 @@ int Texture::loadImage(const std::string &file, SDL_Renderer *_renderer,
   clip = _clip;
   texture = IMG_LoadTexture(_renderer, file.c_str());
   if (texture == nullptr) {
-    throw new TextureException();
+    throw TextureException();
   }
   if (_clip != nullptr) {
     rectangle->w = _clip->w;
@@ -82,6 +85,8 @@ void Texture::draw() const {
   case FONT:
     FC_Draw(font, renderer, rectangle->x, rectangle->y, text.c_str());
     break;
+  case NONE:
+    break;
   }
 }
 
@@ -105,6 +110,8 @@ short Texture::getWidth() {
     return (short)rectangle->w;
   case FONT:
     return (short)FC_GetWidth(font, text.c_str());
+  case NONE:
+    return 0;
   }
 }
 
@@ -114,6 +121,8 @@ short Texture::getHeight() {
     return (short)rectangle->h;
   case FONT:
     return (short)FC_GetHeight(font, text.c_str());
+  case NONE:
+    return 0;
   }
 }
 

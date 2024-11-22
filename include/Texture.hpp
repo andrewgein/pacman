@@ -38,7 +38,7 @@ public:
   void center();
 
 private:
-  enum Type { IMAGE, FONT } type;
+  enum Type { IMAGE, FONT, NONE } type;
   SDL_Renderer *renderer;
   SDL_Texture *texture;
   SDL_Rect *rectangle;

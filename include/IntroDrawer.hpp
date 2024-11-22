@@ -35,7 +35,7 @@ private:
     }
 
   private:
-    const TextData *_data;
+    const TextData *_data = NULL;
     Texture texture;
   };
 
@@ -54,7 +54,7 @@ private:
 
   private:
     Texture texture;
-    const ImageData *_data;
+    const ImageData *_data = NULL;
   };
   static const Drawable *getPointer(const ImageDrawer &i) { return &i; }
   std::list<const Drawable *> _drawers;

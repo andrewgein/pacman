@@ -13,8 +13,8 @@ static const int WINDOW_HEIGHT = GameHeight * 24;
 static const int WINDOW_WIDTH = GameWidth * 24;
 static const int BLOCK_SIZE = 24;
 
-static const std::string SPRITE_SHEET_FILE = "resources/images/Map.png";
-static const std::string FONT_FILE = "resources/fonts/Emulogic.ttf";
+static const char SPRITE_SHEET_FILE[] = "resources/images/Map.png";
+static const char FONT_FILE[] = "resources/fonts/Emulogic.ttf";
 static const SDL_Color WHITE = {.r = 255, .g = 255, .b = 255, .a = 255};
 static const SDL_Color RED = {.r = 255, .g = 0, .b = 0, .a = 255};
 static const SDL_Color PINK = {.r = 252, .g = 181, .b = 255, .a = 255};

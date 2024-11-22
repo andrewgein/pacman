@@ -2,6 +2,7 @@
 
 GameSoundController::GameSoundController(GameData &data)
     : _data(data), _playerSoundController(_data.player), _ghostSoundController(data) {
+  _playingNow = NULL;
   _startSample = Mix_LoadWAV("resources/sounds/start.wav");
   _eatGhostSample = Mix_LoadWAV("resources/sounds/eat_ghost.wav");
   if (_startSample == NULL || _eatGhostSample == NULL) {

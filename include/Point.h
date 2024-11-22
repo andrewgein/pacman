@@ -18,7 +18,7 @@ inline bool operator!=(const cpoint_t &a, const cpoint_t &b) {
 }
 
 inline bool operator<(const cpoint_t &a, const cpoint_t &b) {
-  return a.x == b.x ? a.x < b.x : a.y < b.y;
+  return a.x == b.x ? a.y < b.y : a.x < b.x;
 }
 
 inline std::ostream &operator<<(std::ostream &stream, const cpoint_t &point) {
@@ -53,7 +53,7 @@ inline bool operator!=(const point_t &a, const point_t &b) {
 }
 
 inline bool operator<(const point_t &a, const point_t &b) {
-  return a.x == b.x ? a.x < b.x : a.y < b.y;
+  return a.x == b.x ? a.y < b.y : a.x < b.x;
 }
 
 inline std::ostream &operator<<(std::ostream &stream, const point_t &point) {

@@ -1,6 +1,7 @@
 #include "PlayerSoundController.hpp"
 
 PlayerSoundController::PlayerSoundController(PlayerData &data) : _data(data) {
+  _playingNow = NULL;
   _wakaSample1 = Mix_LoadWAV("resources/sounds/eat_dot_0.wav");
   _wakaSample2 = Mix_LoadWAV("resources/sounds/eat_dot_1.wav");
   _deathSample = Mix_LoadWAV("resources/sounds/death_2.wav");

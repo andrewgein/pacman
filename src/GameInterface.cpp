@@ -4,6 +4,8 @@ GameInterface::GameInterface(const int &score, const int &highScore,
                              SDL_Renderer *renderer)
     : _score(score), _highScore(highScore) {
   _renderer = renderer;
+  _prevScore = 0;
+  _prevHighScore = 0;
   _highScoreTitleTexture.loadFont(FONT_FILE, "HIGH SCORE", 24, &WHITE, _renderer);
   _highScoreTitleTexture.setCoordinates(
       (WINDOW_WIDTH - _highScoreTitleTexture.getWidth()) / 2, 0);

@@ -34,22 +34,16 @@ private:
     bool *isVisible;
     Timer *timer;
   } AnimationUnit;
-  struct {
-    Texture texture;
-    point_t position;
-  } _food;
   void moveGhost(GhostData &);
   void movePlayer();
   bool isCollidingWithPlayer(const GhostData &);
   GhostData getNewGhostData(const int &);
-  SDL_Renderer *_renderer;
   Texture _tableHeader;
   std::list<GhostData *> _ghosts;
   std::queue<AnimationUnit> _animationList;
   Timer _blinkTimer;
   bool _ghostWhereEaten;
   bool _foodWhereEaten;
-  bool _isBlinkingTextureVisible;
   Timer _entityUpdateTimer;
   Timer _frightenedUpdateTimer;
   Timer _ghostWhereEatenTimer;

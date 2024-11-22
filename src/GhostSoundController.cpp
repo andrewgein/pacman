@@ -8,6 +8,7 @@ GhostSoundController::GhostSoundController(GameData &data) {
     std::cerr << "Mix_LoadWAV error\n";
     exit(1);
   }
+  _playingNow = NULL;
   _ghosts[0] = &data.blinky;
   _ghosts[1] = &data.pinky;
   _ghosts[2] = &data.inky;

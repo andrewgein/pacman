@@ -2,7 +2,9 @@
 
 Timer::Timer(int triggerTime) {
   _triggerTime = triggerTime;
+  _startTicks = 0;
   _active = false;
+  _paused = false;
 }
 
 void Timer::start() {
