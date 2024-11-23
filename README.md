@@ -17,6 +17,6 @@ make
 ```
 Run the executable:
 ```
-./a.out
+./pacman
 ```
 ![screenshot](resources/images/screenshot.png)
