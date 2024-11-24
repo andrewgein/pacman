@@ -42,28 +42,19 @@ INCLUDE_FLAGS += -I./lib -I./include
 all: $(OUTFILE)
 	ln -sf $(OUTFILE) $(EXE)
 
-debug: $(DEBUG_OUTFILE)
+debug: $(LIBOBJ)
+	mkdir -p $(DEBUG_OUTPATH)
+	$(CXX) $(STDFLAG) $(CXXFLAGS) $(INCLUDE_FLAGS) $(SRC) $(LIBOBJ) -o $(DEBUG_OUTFILE)
 	ln -sf $(DEBUG_OUTFILE) $(EXE)
 
 $(OUTFILE): $(OBJ) $(LIBOBJ)
 	mkdir -p $(OUTPATH)
 	$(CXX) $(STDFLAG) $(CXXFLAGS) $(INCLUDE_FLAGS) $(OBJ) $(LIBOBJ) -o $(OUTFILE)
 
-$(DEBUG_OUTFILE): $(DEBUG_OBJ) $(LIBOBJ)
-	mkdir -p $(DEBUG_OUTPATH)
-	mkdir -p $(OUTPATH)
-	$(CXX) $(STDFLAG) $(CXXFLAGS) $(INCLUDE_FLAGS) $(DEBUG_OBJ) $(LIBOBJ) -o $(DEBUG_OUTFILE)
-
 $(OBJPATH)%.o: src/%.cpp | obj
 	$(CXX) $(STDFLAG) $(CXXFLAGS) $(INCLUDE_FLAGS) -c $< -o $@
 
-$(DEBUG_OBJPATH)%.o: src/%.cpp | obj
-	$(CXX) $(STDFLAG) $(CXXFLAGS) $(INCLUDE_FLAGS) -c $< -o $@
-
 $(OBJPATH)%.o: lib/%.c | obj
-	$(CC) $(CCFLAGS) $(INCLUDE_FLAGS) -c $< -o $@
-
-$(DEBUG_OBJPATH)%.o: lib/%.c | obj
 	$(CC) $(CCFLAGS) $(INCLUDE_FLAGS) -c $< -o $@
 
 obj:
