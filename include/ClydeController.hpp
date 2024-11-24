@@ -9,6 +9,7 @@ public:
   void restart();
 
 private:
+  void reset();
   cpoint_t _cornersPositions[8];
   short _currentCorner;
   void updateTargetCorner();

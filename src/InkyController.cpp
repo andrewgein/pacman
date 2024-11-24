@@ -12,10 +12,10 @@ InkyController::InkyController(GhostData &data, const Map &map,
   _cornersPositions[6] = (cpoint_t){18, 26};
   _cornersPositions[7] = (cpoint_t){18, 23};
   _currentCorner = 0;
-  restart();
+  reset();
 }
 
-void InkyController::restart() {
+void InkyController::reset() {
   _data.position = HOME_POSITION;
   setState(GhostData::Waiting);
   _isAlongEdgeOfTile = true;
@@ -24,6 +24,8 @@ void InkyController::restart() {
   _releaseTimer.deactivate();
   buildPathTo(mkpoint(_data.position.x, HOME_POSITION.y - BLOCK_SIZE));
 }
+
+void InkyController::restart() { reset(); }
 
 point_t InkyController::getHomePosition() const { return HOME_POSITION; };
 

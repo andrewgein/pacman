@@ -15,6 +15,7 @@ public:
   void restart();
 
 private:
+  void reset();
   cpoint_t _cornersPositions[4];
   cpoint_t getCurrentCorner();
   short _currentCorner;

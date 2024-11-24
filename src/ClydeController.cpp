@@ -12,10 +12,10 @@ ClydeController::ClydeController(GhostData &data, const Map &map,
   _cornersPositions[6] = (cpoint_t){12, 26};
   _cornersPositions[7] = (cpoint_t){9, 26};
   _currentCorner = 0;
-  restart();
+  reset();
 }
 
-void ClydeController::restart() {
+void ClydeController::reset() {
   _data.position = HOME_POSITION;
   setState(GhostData::Waiting);
   _isAlongEdgeOfTile = true;
@@ -24,6 +24,8 @@ void ClydeController::restart() {
   _releaseTimer.deactivate();
   buildPathTo(mkpoint(_data.position.x, HOME_POSITION.y - BLOCK_SIZE));
 }
+
+void ClydeController::restart() { reset(); }
 
 point_t ClydeController::getHomePosition() const { return HOME_POSITION; }
 

@@ -8,16 +8,18 @@ BlinkyController::BlinkyController(GhostData &data, const Map &map,
   _cornersPositions[2] = mkcpoint(26, 1);
   _cornersPositions[3] = mkcpoint(26, 5);
   _currentCorner = 0;
-  restart();
+  reset();
 }
 
-void BlinkyController::restart() {
+void BlinkyController::reset() {
   _data.position = EXIT_POSITION;
   _data.state = _phaseQueue.front().state;
   _data.direction = Left;
   _data.isVisible = true;
   clearPath();
 }
+
+void BlinkyController::restart() { reset(); }
 
 void BlinkyController::updateTargetCorner() {
   buildPathTo(getCurrentCorner());

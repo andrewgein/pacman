@@ -1,0 +1,15 @@
+lib/<stdarg.h>
+lib/<stdio.h>
+lib/<stdlib.h>
+lib/<string>
+/**/.DS_Store
+src/<SDL_mixer.h>
+src/<SDL_ttf.h>
+src/<iostream>
+src/<string>
+compile_commands.json
+game.dat
+.cache
+bin/
+obj/
+pacman
