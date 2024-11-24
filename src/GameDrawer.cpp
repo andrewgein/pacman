@@ -76,12 +76,12 @@ void GameDrawer::drawLives() const {
 #ifndef NDEBUG
 void GameDrawer::drawTiles() const {
   SDL_SetRenderDrawColor(_renderer, 0, 200, 0, 255);
-  for (int i = 1; i < GameWidth; i++) {
+  for (int i = 1; i < GAME_WIDTH; i++) {
     SDL_RenderDrawLine(_renderer, BLOCK_SIZE * i, 0, BLOCK_SIZE * i,
-                       GameHeight * BLOCK_SIZE);
+                       GAME_HEIGHT * BLOCK_SIZE);
   }
-  for (int i = 1; i < GameHeight; i++) {
-    SDL_RenderDrawLine(_renderer, 0, BLOCK_SIZE * i, GameWidth * BLOCK_SIZE,
+  for (int i = 1; i < GAME_HEIGHT; i++) {
+    SDL_RenderDrawLine(_renderer, 0, BLOCK_SIZE * i, GAME_WIDTH * BLOCK_SIZE,
                        BLOCK_SIZE * i);
   }
   SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 0);

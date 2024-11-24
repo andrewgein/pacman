@@ -3,14 +3,13 @@
 
 #include <SDL2/SDL.h>
 #include <iostream>
-#include <string>
 
-static const int GameHeight = 36;
-static const int GameWidth = 28;
+static const int GAME_HEIGHT = 36;
+static const int GAME_WIDTH = 28;
 static const int BOARD_WIDTH = 28;
 static const int BOARD_HEIGHT = 31;
-static const int WINDOW_HEIGHT = GameHeight * 24;
-static const int WINDOW_WIDTH = GameWidth * 24;
+static const int WINDOW_HEIGHT = GAME_HEIGHT * 24;
+static const int WINDOW_WIDTH = GAME_WIDTH * 24;
 static const int BLOCK_SIZE = 24;
 
 static const char SPRITE_SHEET_FILE[] = "resources/images/Map.png";
@@ -53,7 +52,7 @@ static const short INKY_TEXTURE_OFFSET_Y = 264;
 static const short CLYDE_TEXTURE_OFFSET_X = 674;
 static const short CLYDE_TEXTURE_OFFSET_Y = 307;
 
-static const char *startMapSchematic[] = {
+static const char startMapSchematic[GAME_HEIGHT][GAME_WIDTH + 1] = {
     "############################", "#............##............#",
     "#.####.#####.##.#####.####.#", "#0####.#####.##.#####.####0#",
     "#.####.#####.##.#####.####.#", "#..........................#",
