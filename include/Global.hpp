@@ -2,7 +2,6 @@
 #define __GLOBAL_H__
 
 #include <SDL2/SDL.h>
-#include <iostream>
 
 static const int GAME_HEIGHT = 36;
 static const int GAME_WIDTH = 28;
