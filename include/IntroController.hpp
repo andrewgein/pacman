@@ -41,9 +41,9 @@ private:
   Texture _tableHeader;
   std::list<GhostData *> _ghosts;
   std::queue<AnimationUnit> _animationList;
-  Timer _blinkTimer;
   bool _ghostWhereEaten;
   bool _foodWhereEaten;
+  Timer _blinkTimer;
   Timer _entityUpdateTimer;
   Timer _frightenedUpdateTimer;
   Timer _ghostWhereEatenTimer;

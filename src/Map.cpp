@@ -1,6 +1,6 @@
 #include "Map.hpp"
 
-Map::Map(SDL_Renderer *renderer) {
+Map::Map(SDL_Renderer *renderer) : _blinkTimer(BLINK_TICKS) {
   if (renderer != NULL) {
     _mapTexture.loadImage(SPRITE_SHEET_FILE, renderer, MAP_CLIP_X_POSITION,
                           MAP_CLIP_Y_POSITION, MAP_CLIP_WIDTH, MAP_CLIP_HEIGHT);
@@ -27,6 +27,7 @@ Map::Map(SDL_Renderer *renderer) {
     strcpy(mapSchematic[i], startMapSchematic[i]);
   }
   _renderer = renderer;
+  _dotsLeft = START_DOTS_COUNT;
 }
 
 bool Map::wallCollision(const point_t &center, const short &collisionFlags) const {
@@ -71,8 +72,10 @@ short Map::foodCollision(const point_t &center) {
   mapSchematic[cellPosition.y][cellPosition.x] = ' ';
   switch (foodType) {
   case '.':
+    _dotsLeft -= 1;
     return 10;
   case '0':
+    _dotsLeft -= 1;
     return 50;
   default:
     return 0;
@@ -94,8 +97,29 @@ void Map::drawFood() const {
 }
 
 void Map::draw() const {
-  _mapTexture.draw();
-  drawFood();
+  if (_isBlinking) {
+    // TODO avoid this
+    if (const_cast<Map *>(this)->_blinkTimer.isTriggered()) {
+      const_cast<Map *>(this)->_isVisible = !_isVisible;
+      const_cast<Map *>(this)->_blinkTimer.start();
+    }
+    if (_isVisible) {
+      _mapTexture.draw();
+    }
+  } else {
+    _mapTexture.draw();
+    drawFood();
+  }
+}
+
+void Map::startBlinking() {
+  _blinkTimer.start();
+  _isBlinking = true;
+}
+
+void Map::stopBlinking() {
+  _blinkTimer.deactivate();
+  _isBlinking = false;
 }
 
 typedef struct {
@@ -267,4 +291,7 @@ void Map::restart() {
   for (int i = 0; i < BOARD_HEIGHT; i++) {
     strcpy(mapSchematic[i], startMapSchematic[i]);
   }
+  _dotsLeft = START_DOTS_COUNT;
 }
+
+bool Map::areAnyDotsLeft() const { return _dotsLeft > 0; }

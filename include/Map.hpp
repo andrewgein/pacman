@@ -9,6 +9,7 @@
 #include "Global.hpp"
 #include "Point.h"
 #include "Texture.hpp"
+#include "Timer.hpp"
 #include <SDL2/SDL.h>
 
 class Map : public Drawable {
@@ -16,6 +17,8 @@ public:
   Map(SDL_Renderer *);
   void draw() const;
   void drawFood() const;
+  void startBlinking();
+  void stopBlinking();
   bool wallCollision(const point_t &, const short &) const;
   bool wallCollision(const cpoint_t &, const short &) const;
   short foodCollision(const point_t &);
@@ -30,6 +33,7 @@ public:
   bool isInTeleport(const point_t &) const;
   static bool isColliding(const point_t &, const point_t &);
   void restart();
+  bool areAnyDotsLeft() const;
 
 private:
   Texture _mapTexture;
@@ -41,6 +45,12 @@ private:
 
   const point_t DOOR_POSITION_R = {14, 12};
   const point_t DOOR_POSITION_L = {13, 12};
+  int _dotsLeft;
+  static const int START_DOTS_COUNT = 244;
+  Timer _blinkTimer;
+  bool _isVisible;
+  bool _isBlinking;
+  static const int BLINK_TICKS = 200;
 };
 
 #endif

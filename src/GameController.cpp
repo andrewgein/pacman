@@ -3,7 +3,8 @@
 GameController::GameController(GameData &data, Map &map)
     : _map(map), _data(data), _playerController(_data.player, _map),
       _energizedTimer(ENERGIZED_TICKS), _readinessTimer(READINESS_TICKS),
-      _ghostWhereEatenTimer(GHOST_WHERE_EATEN_TICKS), _soundController(data) {
+      _ghostWhereEatenTimer(GHOST_WHERE_EATEN_TICKS), _soundController(data),
+      _endOfGameTimer(END_OF_GAME_TICKS) {
   _ghosts[0] = new BlinkyController(_data.blinky, _map, _playerController);
   _ghosts[1] = new PinkyController(_data.pinky, _map, _playerController);
   _ghosts[2] = new InkyController(_data.inky, _map, _playerController);
@@ -16,8 +17,10 @@ void GameController::update() {
     if (!_readinessTimer.isActive()) {
       _readinessTimer.start();
     }
-    if (_readinessTimer.isTriggered())
+    if (_readinessTimer.isTriggered()) {
       _data.stage = GameData::MainGame;
+      _readinessTimer.deactivate();
+    }
     return;
   }
   if (_data.player.state == PlayerData::Dying) {
@@ -43,6 +46,21 @@ void GameController::update() {
     } else {
       return;
     }
+  }
+  if (!_map.areAnyDotsLeft()) {
+    if (!_endOfGameTimer.isActive()) {
+      _data.stage = GameData::EndOfGame;
+      _map.startBlinking();
+      _endOfGameTimer.start();
+    }
+    if (_endOfGameTimer.isTriggered()) {
+      _map.stopBlinking();
+      restart();
+      _map.restart();
+      _endOfGameTimer.deactivate();
+      _data.stage = GameData::Readiness;
+    }
+    return;
   }
 
   _playerController.update();

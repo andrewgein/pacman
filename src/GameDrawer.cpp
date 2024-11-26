@@ -34,6 +34,10 @@ GameDrawer::~GameDrawer() {
 void GameDrawer::draw() const {
   assert(_data->stage != GameData::Intro);
   switch (_data->stage) {
+  case GameData::EndOfGame:
+    _gameInterface.draw();
+    _map.draw();
+    break;
   case GameData::GameOver:
     _gameInterface.draw();
     _map.draw();

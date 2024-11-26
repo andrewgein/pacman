@@ -19,21 +19,20 @@ GhostController::GhostController(GhostData &data, const Map &map,
 GhostController::~GhostController() {}
 
 void GhostController::setState(GhostData::State state) {
-  if (state == _data.state) {
-    return;
-  }
-  if (state == GhostData::Dead) {
-    _collisionFlags = CanUseDoor + CanUseTeleport;
-    _data.state = state;
-    goHome();
-    return;
-  }
   // If state was Scatter or Chase ghost reverses direction
-  if ((_data.state == GhostData::Scatter) || (_data.state == GhostData::Chase)) {
+  if ((state != GhostData::Dead) &&
+      ((_data.state == GhostData::Scatter) || (_data.state == GhostData::Chase))) {
     clearPath();
     reverseDirection();
   }
-  if (state == GhostData::Scatter || state == GhostData::Chase) {
+  switch (state) {
+  case GhostData::Dead:
+    _collisionFlags = CanUseDoor + CanUseTeleport;
+    _data.state = state;
+    goHome();
+    break;
+  case GhostData::Scatter:
+  case GhostData::Chase:
     _collisionFlags = CanUseTeleport;
     assert(!_map.wallCollision(_data.position, _collisionFlags));
     if (state == GhostData::Chase) {
@@ -41,8 +40,11 @@ void GhostController::setState(GhostData::State state) {
     } else {
       updateTargetCorner();
     }
-  }
-  if (state == GhostData::Frightened) {
+    break;
+  case GhostData::Frightened:
+    if (_data.state == state) {
+      return;
+    }
     if (!_phaseQueue.empty() && _phaseQueue.front().timer.isActive()) {
 #ifndef NDEBUG
       std::cout << "[log] pause top state timer\n";
@@ -57,10 +59,15 @@ void GhostController::setState(GhostData::State state) {
       return;
     }
     randomizePath();
-  }
-  if (state == GhostData::ComingOut || state == GhostData::FrightenedAndComingOut) {
+    break;
+  case GhostData::ComingOut:
+  case GhostData::FrightenedAndComingOut:
     _collisionFlags = CanUseDoor + CanUseTeleport;
     goToExit();
+    break;
+  case GhostData::Waiting:
+  case GhostData::FrightenedAndWaiting:
+    break;
   }
   _data.state = state;
 }

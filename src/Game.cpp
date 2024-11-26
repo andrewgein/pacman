@@ -17,6 +17,7 @@ void Game::draw() {
   case GameData::Readiness:
   case GameData::MainGame:
   case GameData::GhostWhereEaten:
+  case GameData::EndOfGame:
   case GameData::GameOver:
     _gameDrawer.draw();
     break;
@@ -33,11 +34,10 @@ void Game::update() {
   case GameData::Readiness:
   case GameData::GhostWhereEaten:
   case GameData::MainGame:
+  case GameData::EndOfGame:
     _gameController.update();
     break;
   case GameData::GameOver:
-    break;
-  case GameData::EndOfGame:
     break;
   }
 }
