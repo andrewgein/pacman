@@ -383,8 +383,6 @@ void GhostController::randomizePath() {
   buildPathTo(nextPoint);
 }
 
-bool GhostController::isPathEmpty() { return getTargetPoint() == NULL; }
-
 void GhostController::goToExit() {
   std::vector<cpoint_t> path1 = _map.buildPath(_data.position, HOME_CENTER_POSITION);
   path1.pop_back();

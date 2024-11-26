@@ -31,7 +31,6 @@ public:
   Direction getDirection() const;
   point_t getPosition() const;
   void playerPositionChanged();
-  bool isPathEmpty();
   void setVisibility(bool);
   bool isVisible();
   bool isFrightened();
