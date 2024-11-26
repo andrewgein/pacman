@@ -166,18 +166,19 @@ void GhostController::update() {
 
   switch (_data.state) {
   case GhostData::Dead:
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; (i < 4 && getTargetPoint() != NULL); i++) {
       if (isOnPorch()) {
         _isAlongEdgeOfTile = true;
         if (_data.direction == Right) {
           onAfterMove();
         }
       }
-      updateDirection();
       move();
+      updateDirection();
     }
     if (getTargetPoint() == NULL) {
       setState(GhostData::ComingOut);
+      updateDirection();
     }
     return;
   case GhostData::Scatter:
