@@ -8,7 +8,7 @@ GhostController::GhostController(GhostData &data, const Map &map,
   _updateTimer.start();
   _data.isVisible = true;
   phase_data phases[7] = {
-      {GhostData::Scatter, Timer(116)},   {GhostData::Chase, Timer(33000)},
+      {GhostData::Scatter, Timer(11600)}, {GhostData::Chase, Timer(33000)},
       {GhostData::Scatter, Timer(11600)}, {GhostData::Chase, Timer(33000)},
       {GhostData::Scatter, Timer(8300)},  {GhostData::Chase, Timer(33000)},
       {GhostData::Scatter, Timer(8300)},
