@@ -21,7 +21,7 @@ public:
   void stopBlinking();
   bool wallCollision(const point_t &, const short &) const;
   bool wallCollision(const cpoint_t &, const short &) const;
-  short foodCollision(const point_t &);
+  short getFoodPoints(const point_t &);
   const point_t getTileCenter(const point_t &);
   std::vector<cpoint_t> buildPathWithDirection(const Direction &, const cpoint_t &,
                                                const cpoint_t &) const;

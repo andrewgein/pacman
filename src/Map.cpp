@@ -66,7 +66,7 @@ bool Map::wallCollision(const cpoint_t &center, const short &collisionFlags) con
   return mapSchematic[center.y][center.x] == '#';
 }
 
-short Map::foodCollision(const point_t &center) {
+short Map::getFoodPoints(const point_t &center) {
   cpoint_t cellPosition = (cpoint_t)center;
   char foodType = mapSchematic[cellPosition.y][cellPosition.x];
   mapSchematic[cellPosition.y][cellPosition.x] = ' ';

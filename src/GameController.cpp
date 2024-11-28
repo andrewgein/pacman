@@ -68,7 +68,7 @@ void GameController::update() {
     _ghosts[i]->update();
 
   // TODO
-  short foodPoints = _map.foodCollision(_playerController.getPosition());
+  short foodPoints = _map.getFoodPoints(_playerController.getPosition());
   updateScore(foodPoints);
   if (foodPoints > 0) {
     _data.player.isEating = true;
